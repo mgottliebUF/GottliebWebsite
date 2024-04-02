@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Fitness Tracker Performance</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
 </head>
 <body>
     <h1>Performance Data</h1>
@@ -22,6 +23,46 @@
         </tr>
         {% endfor %}
     </table>
+
+    <canvas id="performanceChart" width="400" height="200"></canvas> <!-- Chart.js canvas -->
+
+    <script>
+        // Parse the Flask data into JavaScript object
+        var chartData = {{ chart_data|tojson }};
+        
+        // Extract the data
+        var ctx = document.getElementById('performanceChart').getContext('2d');
+        var performanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartData.weeks,
+                datasets: [{
+                    label: 'Bench Press',
+                    data: chartData.bench_press,
+                    borderColor: 'rgb(255, 99, 132)',
+                    borderWidth: 1
+                }, {
+                    label: 'Squat',
+                    data: chartData.squat,
+                    borderColor: 'rgb(54, 162, 235)',
+                    borderWidth: 1
+                }, {
+                    label: 'Deadlift',
+                    data: chartData.deadlift,
+                    borderColor: 'rgb(75, 192, 192)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
+
 
