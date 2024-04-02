@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    database_path = r'C:\ApplicationsProject (1)\performance.db'
+    database_path = r'C:\ApplicationsProject\performance.db'
     conn = sqlite3.connect(database_path)
     cursor = conn.cursor()
 
