@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def main():
     # Assuming the database file 'performance.db' is in the same directory as your app.py
-    database_path = 'performance.db'
+    database_path = r'C:\ApplicationsProject\performance.db'
     # Connect to the SQLite database
     conn = sqlite3.connect(database_path)
     cursor = conn.cursor()
